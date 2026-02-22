@@ -3,280 +3,191 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>C-LiveLearn | Media Pembelajaran C</title>
+  <title>C-LiveLearn | Interactive C Learning</title>
   <style>
-    :root {
-      --bg: #f5f7ff;
-      --card: #ffffff;
-      --text: #1b2559;
-      --muted: #5b6796;
-      --primary: #2b6bff;
-      --primary-soft: #e8efff;
-      --success: #17a673;
-      --warning: #f39c12;
-      --border: #dfe5ff;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      color: var(--text);
-      background: var(--bg);
-      line-height: 1.55;
-    }
-    .container { max-width: 1160px; margin: 0 auto; padding: 0 1rem; }
-    .hero {
-      background: linear-gradient(120deg, #2149cf, #2e8cff);
-      color: #fff;
-      padding: 2.4rem 0 2rem;
-    }
-    .hero h1 { margin: 0 0 .45rem; font-size: clamp(1.8rem, 4.8vw, 2.8rem); }
-    .hero p { margin: 0; opacity: .95; }
-    .hero-grid { display: grid; gap: .8rem; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); margin-top: 1rem; }
-    .stat { background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.3); border-radius: 12px; padding: .8rem; }
-
-    main { padding: 1rem 0 2rem; display: grid; gap: 1rem; }
-    .card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 1rem; }
-    h2 { margin-top: 0; }
-
-    .grid { display: grid; gap: .8rem; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
-    .topic {
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: .75rem;
-      background: #fcfdff;
-    }
-    .pill {
-      display: inline-block;
-      background: var(--primary-soft);
-      color: var(--primary);
-      border: 1px solid #bfd1ff;
-      border-radius: 999px;
-      padding: .2rem .6rem;
-      font-size: .83rem;
-      margin-bottom: .45rem;
-    }
-    .controls { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin-bottom: .7rem; }
-    select, button {
-      border: 1px solid #c9d6ff;
-      border-radius: 9px;
-      padding: .5rem .7rem;
-      font: inherit;
-      background: white;
-      color: var(--text);
-      cursor: pointer;
-    }
-    button.primary { background: var(--primary); color: #fff; border-color: var(--primary); }
-    .challenge {
-      border: 1px solid var(--border);
-      border-left: 5px solid var(--primary);
-      border-radius: 11px;
-      padding: .75rem;
-      margin-bottom: .6rem;
-      background: #fff;
-    }
-    .challenge ul { margin: .45rem 0 0 1rem; }
-
-    .exercise-item, .question-item {
-      border: 1px solid var(--border);
-      border-radius: 11px;
-      padding: .7rem;
-      background: #fff;
-    }
-
-    .quiz-box { margin-top: .8rem; border: 1px dashed #bfd1ff; border-radius: 10px; padding: .8rem; background: #fafcff; }
-    .quiz-answers { display: flex; flex-wrap: wrap; gap: .5rem; }
-    #quizResult { margin-top: .6rem; font-weight: 600; }
-
-    .rubric { display: grid; gap: .5rem; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-    .rubric div { border: 1px solid var(--border); border-radius: 10px; padding: .7rem; }
-
-    footer { text-align: center; color: var(--muted); padding: .9rem 0 1.5rem; }
+    :root{--bg:#f4f7ff;--card:#fff;--text:#1e2a5a;--muted:#6070a3;--pri:#2f6dff;--ok:#16a34a;--warn:#d97706;--border:#dce5ff}
+    *{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--text)}
+    .container{max-width:1180px;margin:auto;padding:0 1rem}
+    .hero{background:linear-gradient(135deg,#2654d8,#3597ff);color:#fff;padding:2rem 0}
+    .hero h1{margin:.2rem 0}.hero p{margin:0;opacity:.95}
+    .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.6rem;margin-top:1rem}
+    .kpi{background:#ffffff22;border:1px solid #ffffff55;border-radius:10px;padding:.6rem}
+    .tabs{display:flex;gap:.4rem;flex-wrap:wrap;margin:1rem 0}
+    .tab{border:1px solid #c7d7ff;background:#fff;padding:.5rem .8rem;border-radius:8px;cursor:pointer}
+    .tab.active{background:var(--pri);border-color:var(--pri);color:#fff}
+    .section{display:none}.section.active{display:block}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1rem;margin-bottom:.9rem}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:.7rem}
+    .item{border:1px solid var(--border);border-radius:10px;padding:.7rem;background:#fcfdff}
+    .pill{font-size:.8rem;background:#eaf0ff;border:1px solid #bfd1ff;color:#2f6dff;padding:.2rem .5rem;border-radius:999px;display:inline-block}
+    .challenge{cursor:pointer;transition:.15s}.challenge:hover{transform:translateY(-2px);box-shadow:0 8px 20px #00000012}
+    select,button,textarea,input{font:inherit}
+    select,textarea,input{width:100%;padding:.55rem;border-radius:8px;border:1px solid #c9d6ff}
+    button{border:1px solid #c9d6ff;background:#fff;padding:.5rem .75rem;border-radius:8px;cursor:pointer}
+    button.primary{background:var(--pri);border-color:var(--pri);color:#fff}
+    .row{display:grid;grid-template-columns:1.2fr 1fr;gap:.8rem}
+    pre{background:#111a36;color:#d7e4ff;padding:.8rem;border-radius:8px;overflow:auto;min-height:80px}
+    .muted{color:var(--muted)} .ok{color:var(--ok)} .warn{color:var(--warn)}
+    @media(max-width:880px){.row{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
-  <section class="hero">
+  <header class="hero">
     <div class="container">
       <h1>C-LiveLearn</h1>
-      <p>Media pembelajaran algoritma pemrograman C: materi bertahap, tantangan live coding, latihan struktur kode, dan evaluasi kemampuan.</p>
-      <div class="hero-grid">
-        <div class="stat"><strong>7 Level</strong><br/>Dasar hingga fungsi</div>
-        <div class="stat"><strong>8 Materi Inti</strong><br/>Sesuai kurikulum yang disusun</div>
-        <div class="stat"><strong>Challenge Cards</strong><br/>Dari mudah sampai sulit</div>
-        <div class="stat"><strong>Duolingo Mode</strong><br/>Latihan interaktif + gamifikasi</div>
+      <p>Belajar algoritma & C lebih interaktif: klik materi, pilih challenge, dan coba live code (simulasi).</p>
+      <div class="kpis">
+        <div class="kpi"><strong>7 Level</strong><br>Dasar → Fungsi</div>
+        <div class="kpi"><strong>Challenge</strong><br>Dapat dipilih & dicoba</div>
+        <div class="kpi"><strong>Live Code</strong><br>Jalankan simulasi</div>
+        <div class="kpi"><strong>Evaluasi</strong><br>Quiz + scoring</div>
       </div>
     </div>
-  </section>
+  </header>
 
   <main class="container">
-    <section class="card">
-      <h2>Kurikulum Materi (Level 1–7)</h2>
-      <div class="grid" id="curriculumGrid"></div>
+    <nav class="tabs" id="tabs">
+      <button class="tab active" data-target="curriculum">Kurikulum</button>
+      <button class="tab" data-target="challenge">Challenge</button>
+      <button class="tab" data-target="livecode">Live Code</button>
+      <button class="tab" data-target="quiz">Evaluasi Cepat</button>
+    </nav>
+
+    <section id="curriculum" class="section active">
+      <div class="card">
+        <h2>Kurikulum Materi</h2>
+        <div class="grid" id="curriculumGrid"></div>
+      </div>
     </section>
 
-    <section class="card">
-      <h2>Kartu Tantangan Live Coding</h2>
-      <div class="controls">
-        <label for="levelFilter">Filter level:</label>
-        <select id="levelFilter">
-          <option value="all">Semua level</option>
-          <option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option>
-          <option value="4">Level 4</option><option value="5">Level 5</option><option value="6">Level 6</option><option value="7">Level 7</option>
-        </select>
+    <section id="challenge" class="section">
+      <div class="card">
+        <h2>Kartu Tantangan Live Coding</h2>
+        <label class="muted">Filter level</label>
+        <select id="levelFilter"><option value="all">Semua</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option></select>
+        <div class="grid" id="challengeGrid" style="margin-top:.7rem"></div>
       </div>
-      <div id="challengeList"></div>
+      <div class="card" id="challengeDetail">
+        <h3>Detail Challenge</h3>
+        <p class="muted">Klik salah satu kartu challenge untuk melihat detail.</p>
+      </div>
     </section>
 
-    <section class="card">
-      <h2>Duolingo Mode (Latihan Struktur Kode)</h2>
-      <div class="grid">
-        <article class="exercise-item"><strong>Susun Kode</strong><br/>Susun baris acak menjadi program C valid.</article>
-        <article class="exercise-item"><strong>Lengkapi Sintaks</strong><br/>Isi placeholder sintaks `__` pada potongan kode.</article>
-        <article class="exercise-item"><strong>Prediksi Output</strong><br/>Pahami alur logika lalu tebak output program.</article>
-        <article class="exercise-item"><strong>Perbaiki Bug</strong><br/>Identifikasi bug kecil pada 1–3 baris kode.</article>
-      </div>
-
-      <div class="quiz-box">
-        <div class="controls">
-          <button class="primary" id="startQuiz">Mulai latihan cepat</button>
-          <span class="pill" id="quizStatus">Belum mulai</span>
-          <span class="pill">XP: <strong id="xp">0</strong></span>
-          <span class="pill">Streak: <strong id="streak">0</strong></span>
-          <span class="pill">Hearts: <strong id="hearts">5</strong></span>
-        </div>
-        <div id="quizPanel" hidden>
-          <p><strong>Soal:</strong> Apa fungsi <code>scanf</code> dalam C?</p>
-          <div class="quiz-answers">
-            <button data-answer="A">A. Menampilkan output</button>
-            <button data-answer="B">B. Menerima input pengguna</button>
-            <button data-answer="C">C. Menghapus variabel</button>
-            <button data-answer="D">D. Menghitung ekspresi</button>
+    <section id="livecode" class="section">
+      <div class="card row">
+        <div>
+          <h2>Live Code Playground (Simulasi)</h2>
+          <label class="muted">Pilih challenge</label>
+          <select id="playgroundChallenge"></select>
+          <label class="muted" style="margin-top:.5rem;display:block">Input program (opsional)</label>
+          <input id="programInput" placeholder="Contoh: 3 4">
+          <label class="muted" style="margin-top:.5rem;display:block">Kode C</label>
+          <textarea id="codeEditor" rows="14">#include <stdio.h>
+int main() {
+  printf("Halo, C!\n");
+  return 0;
+}</textarea>
+          <div style="display:flex;gap:.5rem;margin-top:.6rem">
+            <button class="primary" id="runBtn">Jalankan</button>
+            <button id="resetBtn">Reset Template</button>
           </div>
-          <p id="quizResult"></p>
+        </div>
+        <div>
+          <h3>Output</h3>
+          <pre id="outputBox">Belum dijalankan.</pre>
+          <h3>Feedback</h3>
+          <div id="feedback" class="muted">Sistem akan memeriksa struktur dasar kode sesuai challenge.</div>
         </div>
       </div>
     </section>
 
-    <section class="card">
-      <h2>Latihan Soal Evaluasi</h2>
-      <h3>Pilihan Ganda</h3>
-      <div class="grid">
-        <article class="question-item">1) Apa fungsi <code>scanf</code> dalam C?<br/><em>Kunci: B</em></article>
-        <article class="question-item">2) Struktur untuk banyak kondisi diskrit adalah?<br/><em>Kunci: switch-case</em></article>
-      </div>
-      <h3>Soal Coding Singkat</h3>
-      <div class="grid">
-        <article class="question-item">Buat program faktorial dari sebuah bilangan input.</article>
-        <article class="question-item">Hitung rata-rata N bilangan yang disimpan dalam array.</article>
-        <article class="question-item">Buat fungsi <code>int max2(int a, int b)</code> untuk mencari nilai terbesar.</article>
-      </div>
-      <h3>Rubrik Penilaian</h3>
-      <div class="rubric">
-        <div><strong>Benar fungsional (60%)</strong><br/>Output sesuai seluruh test case.</div>
-        <div><strong>Kualitas kode (25%)</strong><br/>Keterbacaan, penamaan, dan struktur.</div>
-        <div><strong>Efisiensi dasar (15%)</strong><br/>Pemakaian loop/fungsi yang tepat.</div>
+    <section id="quiz" class="section">
+      <div class="card">
+        <h2>Evaluasi Cepat</h2>
+        <p><strong>Soal:</strong> Fungsi <code>scanf</code> pada C adalah...</p>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+          <button class="qa" data-a="A">A. Menampilkan output</button>
+          <button class="qa" data-a="B">B. Menerima input pengguna</button>
+          <button class="qa" data-a="C">C. Menghapus variabel</button>
+        </div>
+        <p id="quizResult" class="muted"></p>
+        <p>XP: <strong id="xp">0</strong> · Streak: <strong id="streak">0</strong> · Hearts: <strong id="hearts">5</strong></p>
       </div>
     </section>
   </main>
 
-  <footer>
-    C-LiveLearn MVP · Siap dilanjutkan ke auto-check code dan dashboard progres pengguna.
-  </footer>
+<script>
+const curriculum=[
+{level:1,title:'Algoritma',m:['Pseudocode','Flowchart'],o:'Menyusun langkah logis.'},
+{level:2,title:'Struktur C',m:['include','main','tipe data'],o:'Membuat program valid.'},
+{level:3,title:'Sintaks + I/O',m:[';','printf','scanf'],o:'Menerima input dan output.'},
+{level:4,title:'Percabangan',m:['if-else','switch-case'],o:'Keputusan berbasis kondisi.'},
+{level:5,title:'Perulangan',m:['for','while','do-while'],o:'Proses berulang efisien.'},
+{level:6,title:'Array',m:['deklarasi','iterasi','statistik'],o:'Mengelola data kolektif.'},
+{level:7,title:'Fungsi',m:['parameter','return','modular'],o:'Kode reusable.'}
+];
+const challenges=[
+{id:'halo',level:1,title:'Halo, C!',tujuan:'Tampilkan "Halo, C!"',batasan:'main + printf',lulus:'Output tepat'},
+{id:'sum',level:3,title:'Kalkulator Sederhana',tujuan:'Jumlah dua bilangan',batasan:'scanf + printf',lulus:'Hitung benar'},
+{id:'odd',level:4,title:'Ganjil/Genap',tujuan:'Cek paritas bilangan',batasan:'if-else',lulus:'Output sesuai'}
+];
 
-  <script>
-    const curriculum = [
-      { level: 1, title: "Fondasi Algoritma", outcome: "Menuliskan algoritma sederhana.", materi: ["Pengertian algoritma", "Pseudocode", "Flowchart"] },
-      { level: 2, title: "Struktur Dasar C", outcome: "Membuat program C sederhana.", materi: ["#include", "main", "Tipe data", "Variabel"] },
-      { level: 3, title: "Sintaks & Input/Output", outcome: "Input pengguna dan tampilkan hasil.", materi: ["Sintaks", "printf", "scanf"] },
-      { level: 4, title: "Percabangan", outcome: "Keputusan berdasarkan kondisi.", materi: ["if-else", "switch-case"] },
-      { level: 5, title: "Perulangan", outcome: "Proses berulang efisien.", materi: ["for", "while", "do-while"] },
-      { level: 6, title: "Array", outcome: "Memproses kumpulan data.", materi: ["Deklarasi", "Input/output elemen", "Min-max-rata2"] },
-      { level: 7, title: "Fungsi", outcome: "Program modular dan reusable.", materi: ["Deklarasi fungsi", "Parameter", "Return value"] }
-    ];
+const cg=document.getElementById('curriculumGrid');
+curriculum.forEach(c=>{const d=document.createElement('div');d.className='item';d.innerHTML=`<span class="pill">Level ${c.level}</span><h3>${c.title}</h3><p><strong>Materi:</strong> ${c.m.join(', ')}</p><p><strong>Outcome:</strong> ${c.o}</p>`;cg.appendChild(d)});
 
-    const challengeCards = [
-      { level: 1, title: "Halo, C!", tujuan: "Tampilkan teks Halo, C!", batasan: "Gunakan main + printf.", lulus: "Output sama persis." },
-      { level: 3, title: "Kalkulator Sederhana", tujuan: "Input 2 bilangan, tampilkan jumlah.", batasan: "Gunakan scanf dan printf.", lulus: "Lolos input positif/negatif." },
-      { level: 4, title: "Ganjil atau Genap", tujuan: "Tentukan paritas bilangan.", batasan: "Wajib if-else.", lulus: "Lolos seluruh test case." },
-      { level: 4, title: "Menu Nilai Huruf", tujuan: "Konversi nilai angka ke huruf A-E.", batasan: "Wajib switch-case.", lulus: "Mapping sesuai rubrik." },
-      { level: 5, title: "Deret Bilangan", tujuan: "Cetak 1 sampai N.", batasan: "Buat versi for, while, do-while.", lulus: "Output ketiganya identik." },
-      { level: 6, title: "Statistik Array", tujuan: "Cari min, max, rata-rata.", batasan: "Input ukuran array.", lulus: "Akurat di beberapa dataset." },
-      { level: 7, title: "Pecah Program dengan Fungsi", tujuan: "Refaktor kalkulator mini.", batasan: "Minimal 3 fungsi.", lulus: "Modular dan lolos test fungsional." }
-    ];
+const levelFilter=document.getElementById('levelFilter');
+const challengeGrid=document.getElementById('challengeGrid');
+const challengeDetail=document.getElementById('challengeDetail');
+function renderChallenge(){
+  const val=levelFilter.value;challengeGrid.innerHTML='';
+  challenges.filter(c=>val==='all'||String(c.level)===val).forEach(c=>{
+    const d=document.createElement('div');d.className='item challenge';d.innerHTML=`<span class="pill">Level ${c.level}</span><h3>${c.title}</h3><p>${c.tujuan}</p>`;
+    d.onclick=()=>{challengeDetail.innerHTML=`<h3>${c.title}</h3><p><strong>Tujuan:</strong> ${c.tujuan}</p><p><strong>Batasan:</strong> ${c.batasan}</p><p><strong>Kriteria lulus:</strong> ${c.lulus}</p><button class="primary" onclick="goLive('${c.id}')">Coba di Live Code</button>`};
+    challengeGrid.appendChild(d);
+  });
+}
+levelFilter.onchange=renderChallenge;renderChallenge();
 
-    const curriculumGrid = document.getElementById("curriculumGrid");
-    const challengeList = document.getElementById("challengeList");
-    const levelFilter = document.getElementById("levelFilter");
+const playgroundChallenge=document.getElementById('playgroundChallenge');
+challenges.forEach(c=>{const o=document.createElement('option');o.value=c.id;o.textContent=`L${c.level} - ${c.title}`;playgroundChallenge.appendChild(o)});
+const templates={
+halo:`#include <stdio.h>\nint main(){\n  printf("Halo, C!\\n");\n  return 0;\n}`,
+sum:`#include <stdio.h>\nint main(){\n  int a,b;\n  scanf("%d %d", &a, &b);\n  printf("%d\\n", a+b);\n  return 0;\n}`,
+odd:`#include <stdio.h>\nint main(){\n  int n;\n  scanf("%d", &n);\n  if(n%2==0) printf("Genap\\n");\n  else printf("Ganjil\\n");\n  return 0;\n}`
+};
+function goLive(id){document.querySelector('[data-target="livecode"]').click();playgroundChallenge.value=id;codeEditor.value=templates[id]}
+window.goLive=goLive;
 
-    curriculum.forEach(item => {
-      const el = document.createElement("article");
-      el.className = "topic";
-      el.innerHTML = `
-        <span class="pill">Level ${item.level}</span>
-        <h3>${item.title}</h3>
-        <p><strong>Materi:</strong> ${item.materi.join(", ")}</p>
-        <p><strong>Learning outcome:</strong> ${item.outcome}</p>
-      `;
-      curriculumGrid.appendChild(el);
-    });
+const codeEditor=document.getElementById('codeEditor');
+const outputBox=document.getElementById('outputBox');
+const feedback=document.getElementById('feedback');
+playgroundChallenge.onchange=()=>{codeEditor.value=templates[playgroundChallenge.value];outputBox.textContent='Template dimuat.';feedback.textContent=''};
+document.getElementById('resetBtn').onclick=()=>{codeEditor.value=templates[playgroundChallenge.value]};
 
-    function renderChallenges(level = "all") {
-      challengeList.innerHTML = "";
-      const data = level === "all" ? challengeCards : challengeCards.filter(item => String(item.level) === level);
-      if (data.length === 0) {
-        challengeList.innerHTML = "<p>Tidak ada challenge di level ini.</p>";
-        return;
-      }
-      data.forEach(item => {
-        const el = document.createElement("article");
-        el.className = "challenge";
-        el.innerHTML = `
-          <span class="pill">Level ${item.level}</span>
-          <h3>${item.title}</h3>
-          <ul>
-            <li><strong>Tujuan:</strong> ${item.tujuan}</li>
-            <li><strong>Batasan:</strong> ${item.batasan}</li>
-            <li><strong>Kriteria lulus:</strong> ${item.lulus}</li>
-          </ul>
-        `;
-        challengeList.appendChild(el);
-      });
-    }
-    levelFilter.addEventListener("change", e => renderChallenges(e.target.value));
-    renderChallenges();
+document.getElementById('runBtn').onclick=()=>{
+  const code=codeEditor.value;const input=document.getElementById('programInput').value.trim();const id=playgroundChallenge.value;
+  let out='';let pass=false;let note='';
+  if(!code.includes('int main')){feedback.innerHTML='<span class="warn">Harus ada fungsi main().</span>';outputBox.textContent='Compile error (simulasi).';return}
+  if(id==='halo'){
+    pass=/printf\s*\(\s*"Halo, C!/.test(code);out=pass?'Halo, C!':'(output tidak sesuai)';note='Cek penggunaan printf("Halo, C!").';
+  }
+  if(id==='sum'){
+    const nums=input.split(/\s+/).map(Number).filter(n=>!Number.isNaN(n));
+    pass=code.includes('scanf')&&/a\s*\+\s*b/.test(code)&&nums.length>=2;
+    out=nums.length>=2?String(nums[0]+nums[1]):'Masukkan 2 angka di input (contoh: 3 4)';note='Harus ada scanf dan operasi a+b.';
+  }
+  if(id==='odd'){
+    const n=Number(input);pass=code.includes('if')&&code.includes('%2')&&!Number.isNaN(n);
+    out=Number.isNaN(n)?'Masukkan 1 angka (contoh: 7)':(n%2===0?'Genap':'Ganjil');note='Pastikan menggunakan if-else dan operator modulo.';
+  }
+  outputBox.textContent=out;
+  feedback.innerHTML=pass?`<span class="ok">✅ Lolos cek struktur challenge.</span> ${note}`:`<span class="warn">⚠️ Belum lolos.</span> ${note}`;
+};
 
-    let xp = 0, streak = 0, hearts = 5;
-    const startQuiz = document.getElementById("startQuiz");
-    const quizPanel = document.getElementById("quizPanel");
-    const quizResult = document.getElementById("quizResult");
-    const quizStatus = document.getElementById("quizStatus");
-    const xpEl = document.getElementById("xp");
-    const streakEl = document.getElementById("streak");
-    const heartsEl = document.getElementById("hearts");
+let xp=0,streak=0,hearts=5;
+document.querySelectorAll('.qa').forEach(b=>b.onclick=()=>{const ok=b.dataset.a==='B';if(ok){xp+=10;streak++}else{hearts=Math.max(0,hearts-1);streak=0}document.getElementById('xp').textContent=xp;document.getElementById('streak').textContent=streak;document.getElementById('hearts').textContent=hearts;document.getElementById('quizResult').innerHTML=ok?'<span class="ok">Benar! +10 XP</span>':'<span class="warn">Jawaban salah, coba lagi.</span>';});
 
-    startQuiz.addEventListener("click", () => {
-      quizPanel.hidden = false;
-      quizStatus.textContent = "Sedang latihan";
-    });
-
-    quizPanel.addEventListener("click", (e) => {
-      if (e.target.tagName !== "BUTTON") return;
-      const correct = e.target.dataset.answer === "B";
-      if (correct) {
-        xp += 10; streak += 1;
-        quizResult.textContent = "Benar! +10 XP";
-        quizResult.style.color = "var(--success)";
-      } else {
-        hearts = Math.max(0, hearts - 1);
-        streak = 0;
-        quizResult.textContent = "Jawaban belum tepat, coba lagi.";
-        quizResult.style.color = "var(--warning)";
-      }
-      xpEl.textContent = xp;
-      streakEl.textContent = streak;
-      heartsEl.textContent = hearts;
-      quizStatus.textContent = hearts === 0 ? "Heart habis" : "Sedang latihan";
-    });
-  </script>
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));t.classList.add('active');document.getElementById(t.dataset.target).classList.add('active');});
+</script>
 </body>
 </html>
